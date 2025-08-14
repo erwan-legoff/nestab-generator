@@ -9,13 +9,13 @@ import TabNote from './TabNote'
 import { TabNoteInterface } from './TabNoteInterface'
 // this aims to deal with silence, where there is no note and no case number
 export class TabNoteSilence implements TabNoteInterface {
-  private note: PlayedNoteOneSilence
+  private playedNote: PlayedNoteOneSilence
   constructor(note: PlayedNoteOneSilence) {
-    this.note = note
+    this.playedNote = note
   }
 
   getPlayedNote(): PlayedNoteOneInterface {
-    return this.note
+    return this.playedNote
   }
 
   public toString(): string {
