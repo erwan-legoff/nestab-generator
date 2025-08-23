@@ -14,4 +14,5 @@ export class TracksService {
     midi.tracks.push(melody.getMidiTrack());
     return midi.toArray();
   }
+  generateFromMelody(generateTrackFromMelodyDto:GenerateTrackFromMelodyDto)
 }
