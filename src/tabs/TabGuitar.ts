@@ -42,6 +42,9 @@ export class TabGuitar implements Tab {
   getMusic(): TabLine[] {
     return this.fretBoard.getMusicTabLines();
   }
+  getFretBoard(): FretBoardGuitar {
+    return this.fretBoard;
+  }
 
   private chooseStringNumber(
     note: NoteOneInterface,
