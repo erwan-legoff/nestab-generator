@@ -2,6 +2,10 @@ import { Injectable } from '@nestjs/common';
 import { MelodiesService } from 'src/melodies/melodies.service';
 import { GenerateTrackDto } from './dto/generate-track.dto';
 import { Midi } from '@tonejs/midi';
+import { GenerateTrackFromMelodyDto } from './dto/generate-track-from-melody.dto';
+import { TrackOne } from 'src/notes/TrackOne';
+import PlayedNote from 'src/notes/playedNote/PlayedNoteOne';
+import { convertToPlayedNotes } from 'src/notes/playedNote/convertDtoToPlayedNotes';
 
 @Injectable()
 export class TracksService {
@@ -10,9 +14,20 @@ export class TracksService {
     const melody = this.melodiesService.generate(
       generateTrackDto.generateMelodyDto || {},
     );
+    return this.generateMidiFile(melody);
+  }
+  private generateMidiFile(melody: TrackOne) {
     const midi: Midi = new Midi();
     midi.tracks.push(melody.getMidiTrack());
     return midi.toArray();
   }
-  generateFromMelody(generateTrackFromMelodyDto:GenerateTrackFromMelodyDto)
+
+  generateFromMelody(dto:GenerateTrackFromMelodyDto){
+    const playedNotesDto = dto.playedNotes
+    const playedNotes: PlayedNote[] = convertToPlayedNotes(playedNotesDto)
+    const track = new TrackOne(playedNotes, dto.beatPerMinute);
+    return this.generateMidiFile(track)
+  }
 }
+
+
