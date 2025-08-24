@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { SimpleDownArpegeCompositor } from 'src/compositor/SimpleDownArpegeCompositor';
 import { GenerateMelodyDto } from './dto/generate-melody.dto';
+import NoteOne from 'src/notes/NoteOne';
 
 @Injectable()
 export class MelodiesService {
@@ -10,7 +11,7 @@ export class MelodiesService {
       generateMelodyDto.notesCount,
       generateMelodyDto.tempo,
       generateMelodyDto.scale,
-      generateMelodyDto.key,
+     generateMelodyDto.key ? new NoteOne(generateMelodyDto.key.midi) : undefined 
     );
   }
 }

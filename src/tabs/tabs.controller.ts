@@ -9,7 +9,7 @@ import {
 } from '@nestjs/common';
 import { TabsService } from './tabs.service';
 import { GenerateTabDto } from './dto/generate-tab.dto';
-import { TabFromMelodyDto } from './dto/tab-from-melody.dto';
+import type { TabFromMelodyDto } from './dto/tab-from-melody.dto';
 import type { GenerateTabResponseDto } from './dto/generate-tab.response.dto';
 
 @Controller('tabs')
