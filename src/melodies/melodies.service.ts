@@ -4,7 +4,7 @@ import { GenerateMelodyDto } from './dto/generate-melody.dto';
 
 @Injectable()
 export class MelodiesService {
-  generate(generateMelodyDto: GenerateMelodyDto) {
+  previewGenerate(generateMelodyDto: GenerateMelodyDto) {
     const compositor = new SimpleDownArpegeCompositor();
     return compositor.getMusic(
       generateMelodyDto.notesCount,

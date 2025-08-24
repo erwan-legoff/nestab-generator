@@ -1,19 +1,16 @@
 import { Injectable } from '@nestjs/common';
-import { MelodiesService } from 'src/melodies/melodies.service';
-import { GenerateTrackDto } from './dto/generate-track.dto';
 import { Midi } from '@tonejs/midi';
-import { GenerateTrackFromMelodyDto } from './dto/generate-track-from-melody.dto';
+import { MelodiesService } from 'src/melodies/melodies.service';
 import { TrackOne } from 'src/notes/TrackOne';
-import PlayedNote from 'src/notes/playedNote/PlayedNoteOne';
-import { convertToPlayedNotes } from 'src/notes/playedNote/convertDtoToPlayedNotes';
-import { PlayedNoteDto } from 'src/notes/playedNote/dto/played-note.dto';
 import { convertToTrack } from './convertToTrack';
+import { GenerateTrackDto } from './dto/generate-track.dto';
+import { TrackFromMelodyDto } from './dto/track-from-melody.dto';
 
 @Injectable()
 export class TracksService {
   constructor(private readonly melodiesService: MelodiesService) {}
-  generate(generateTrackDto: GenerateTrackDto): Uint8Array {
-    const melody = this.melodiesService.generate(
+  previewGenerate(generateTrackDto: GenerateTrackDto): Uint8Array {
+    const melody = this.melodiesService.previewGenerate(
       generateTrackDto.generateMelodyDto || {},
     );
     return this.generateMidiFile(melody);
@@ -24,7 +21,7 @@ export class TracksService {
     return midi.toArray();
   }
 
-  generateFromMelody(dto:GenerateTrackFromMelodyDto){
+  previewFromMelody(dto:TrackFromMelodyDto){
     const playedNotesDto = dto.playedNotes
     const track = convertToTrack(playedNotesDto, dto.beatPerMinute);
     return this.generateMidiFile(track)

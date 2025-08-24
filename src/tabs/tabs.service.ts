@@ -4,7 +4,7 @@ import { SimpleDownArpegeCompositor } from 'src/compositor/SimpleDownArpegeCompo
 import { TabGuitar } from './TabGuitar';
 import { MelodiesService } from 'src/melodies/melodies.service';
 import { GenerateTabResponseDto } from './dto/generate-tab.response.dto';
-import { GenerateTabFromMelodyDto } from './dto/generate-tab-from-melody.dto';
+import { TabFromMelodyDto } from './dto/tab-from-melody.dto';
 import { convertToPlayedNotes } from 'src/notes/playedNote/convertDtoToPlayedNotes';
 import { convertToTrack } from 'src/tracks/convertToTrack';
 // import { UpdateTabDto } from './dto/update-tab.dto';
@@ -12,8 +12,8 @@ import { convertToTrack } from 'src/tracks/convertToTrack';
 @Injectable()
 export class TabsService {
   constructor(private readonly melodiesService: MelodiesService) {}
-  generate(generateTabDto: GenerateTabDto): GenerateTabResponseDto {
-    const melody = this.melodiesService.generate(
+  previewGenerate(generateTabDto: GenerateTabDto): GenerateTabResponseDto {
+    const melody = this.melodiesService.previewGenerate(
       generateTabDto.generateMelodyDto || {},
     );
     const tab: TabGuitar = new TabGuitar(generateTabDto.tabName, melody);
@@ -23,7 +23,7 @@ export class TabsService {
     };
     return response;
   }
-  generateFromMelody(generateTabDto: GenerateTabFromMelodyDto): GenerateTabResponseDto
+  previewFromMelody(generateTabDto: TabFromMelodyDto): GenerateTabResponseDto
   {
     const track = convertToTrack(generateTabDto.playedNotes, 120)
     const tab: TabGuitar = new TabGuitar(generateTabDto.tabName, track);

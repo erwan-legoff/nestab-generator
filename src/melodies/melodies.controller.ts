@@ -6,8 +6,8 @@ import { GenerateMelodyDto } from './dto/generate-melody.dto';
 export class MelodiesController {
   constructor(private readonly melodiesService: MelodiesService) {}
 
-  @Post()
+  @Post('/preview/generate')
   generate(@Body() generateMelodyDto: GenerateMelodyDto) {
-    return this.melodiesService.generate(generateMelodyDto);
+    return this.melodiesService.previewGenerate(generateMelodyDto);
   }
 }

@@ -1,7 +1,6 @@
 import { PlayedNoteDto } from 'src/notes/playedNote/dto/played-note.dto';
 
-
-export class GenerateTrackFromMelodyDto {
+export class TabFromMelodyDto {
   playedNotes: PlayedNoteDto[]
-  beatPerMinute: number
+  tabName: string;
 }
