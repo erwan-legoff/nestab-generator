@@ -6,6 +6,7 @@ import { MelodiesService } from 'src/melodies/melodies.service';
 import { GenerateTabResponseDto } from './dto/generate-tab.response.dto';
 import { GenerateTabFromMelodyDto } from './dto/generate-tab-from-melody.dto';
 import { convertToPlayedNotes } from 'src/notes/playedNote/convertDtoToPlayedNotes';
+import { convertToTrack } from 'src/tracks/convertToTrack';
 // import { UpdateTabDto } from './dto/update-tab.dto';
 
 @Injectable()
@@ -24,8 +25,8 @@ export class TabsService {
   }
   generateFromMelody(generateTabDto: GenerateTabFromMelodyDto): GenerateTabResponseDto
   {
-    const melody = convertToPlayedNotes(generateTabDto.playedNotes)
-    const tab: TabGuitar = new TabGuitar(generateTabDto.tabName, melody).;
+    const track = convertToTrack(generateTabDto.playedNotes, 120)
+    const tab: TabGuitar = new TabGuitar(generateTabDto.tabName, track);
     const response: GenerateTabResponseDto = {
       fretBoard: tab.getFretBoard(),
       tabToString: tab.printTab(),

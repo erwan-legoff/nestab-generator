@@ -6,6 +6,8 @@ import { GenerateTrackFromMelodyDto } from './dto/generate-track-from-melody.dto
 import { TrackOne } from 'src/notes/TrackOne';
 import PlayedNote from 'src/notes/playedNote/PlayedNoteOne';
 import { convertToPlayedNotes } from 'src/notes/playedNote/convertDtoToPlayedNotes';
+import { PlayedNoteDto } from 'src/notes/playedNote/dto/played-note.dto';
+import { convertToTrack } from './convertToTrack';
 
 @Injectable()
 export class TracksService {
@@ -24,10 +26,11 @@ export class TracksService {
 
   generateFromMelody(dto:GenerateTrackFromMelodyDto){
     const playedNotesDto = dto.playedNotes
-    const playedNotes: PlayedNote[] = convertToPlayedNotes(playedNotesDto)
-    const track = new TrackOne(playedNotes, dto.beatPerMinute);
+    const track = convertToTrack(playedNotesDto, dto.beatPerMinute);
     return this.generateMidiFile(track)
   }
 }
+
+
 
 
