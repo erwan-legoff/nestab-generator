@@ -18,7 +18,6 @@ export class ChooseFretNumberStrategySimple
     const midiNote = note.getMidi()
     const midiRoot = rootNote.getMidi()
     const maxMidiPossible = midiRoot + maxCaseNumber
-    const maxFretNumber = maxMidiPossible - midiRoot
     const midiNoteSimple = midiNote % 12
     const midiStringSimple = midiRoot % 12
     const midiNoteCorrected =
