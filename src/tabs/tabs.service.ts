@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { GenerateTabDto } from './dto/generate-tab.dto';
-import { SimpleDownArpegeCompositor } from 'src/compositor/SimpleDownArpegeCompositor';
+import { SimpleDownArpegeCompositor } from 'src/compositor/SimpleDownArpeggioCompositor';
 import { TabGuitar } from './TabGuitar';
 import { MelodiesService } from 'src/melodies/melodies.service';
 import { GenerateTabResponseDto } from './dto/generate-tab.response.dto';
@@ -23,14 +23,13 @@ export class TabsService {
     };
     return response;
   }
-  previewFromMelody(generateTabDto: TabFromMelodyDto): GenerateTabResponseDto
-  {
-    const track = convertToTrack(generateTabDto.playedNotes, 120)
+  previewFromMelody(generateTabDto: TabFromMelodyDto): GenerateTabResponseDto {
+    const track = convertToTrack(generateTabDto.playedNotes, 120);
     const tab: TabGuitar = new TabGuitar(generateTabDto.tabName, track);
     const response: GenerateTabResponseDto = {
       fretBoard: tab.getFretBoard(),
       tabToString: tab.printTab(),
     };
-    return response
+    return response;
   }
 }
