@@ -25,7 +25,7 @@ export class ChooseFretNumberStrategySimple
       midiNoteSimple < midiStringSimple ? midiNoteSimple + 12 : midiNoteSimple
 
     if (midiNote > maxMidiPossible || midiNote < midiRoot) {
-      if (midiNoteCorrected > midiStringSimple + maxFretNumber) {
+      if (midiNoteCorrected > maxMidiPossible) {
         throw new Error(
           `The note ${note} is not reproducible on the string (not enough frets) ${rootNote.getName()}`
         )
