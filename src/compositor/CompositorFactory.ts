@@ -4,7 +4,7 @@ import { SimpleDownArpegeCompositor } from './SimpleDownArpeggioCompositor';
 
 export type Compositors = 'RANDOM_SIMPLE' | 'SIMPLE_DOWN_ARPEGGIO';
 export class CompositorFactory {
-  static create(compositor: string | undefined): CompositorInterface {
+  static create(compositor: Compositors | undefined): CompositorInterface {
     switch (compositor) {
       case 'RANDOM_SIMPLE':
         return new RandomSimpleCompositor();
