@@ -62,10 +62,15 @@ export class TabGuitar implements Tab {
 
   printTab(): string {
     let tab = '';
-    this.fretBoard.getMusicTabLines().forEach((tabLine) => {
-      tab += tabLine.toString();
+    const tablines = this.fretBoard.getMusicTabLines();
+    for (
+      let stringNumber = tablines.length - 1;
+      stringNumber >= 0;
+      stringNumber--
+    ) {
+      tab += tablines[stringNumber].toString();
       tab += '\n';
-    });
+    }
     return tab;
   }
 
