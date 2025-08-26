@@ -10,7 +10,7 @@ export class RandomSimpleCompositor implements CompositorInterface {
     notesCount: number = 10,
     tempo: number = 120,
     scale: GenericalScale = new PentatonicScale(),
-    key: NoteOne = NoteOne.noteNameToNote('C4'),
+    key: NoteOne = NoteOne.noteNameToNote('C3'),
   ): TrackOne {
     //! Refactor to use playedNoteOneInterface and silence
     const playedNotes: PlayedNote[] = [];
@@ -29,12 +29,10 @@ export class RandomSimpleCompositor implements CompositorInterface {
             0,
           ),
         );
-        console.log('silence');
       } else {
         const duration = Math.floor(Math.random() * 8) / 4;
         const note = notes[Math.floor(Math.random() * (notes.length - 1))];
         playedNotes.push(new PlayedNote(note, timeBeforeStart, duration));
-        console.log(note.getName());
       }
     }
 
