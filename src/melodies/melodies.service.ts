@@ -5,18 +5,23 @@ import NoteOne from 'src/notes/NoteOne';
 import { CompositorInterface } from 'src/compositor/CompositorInterface';
 import { RandomSimpleCompositor } from 'src/compositor/RandomSimpleCompositor';
 import { CompositorFactory } from 'src/compositor/CompositorFactory';
+import { GenericalScale } from 'src/scales/GenericalScale';
+import { ScaleFactory } from 'src/scales/ScaleFactory';
 
 @Injectable()
 export class MelodiesService {
-  previewGenerate(generateMelodyDto: GenerateMelodyDto) {
-    const compositor: CompositorInterface = CompositorFactory.create(generateMelodyDto.compositor)
+  previewGenerate(dto: GenerateMelodyDto) {
+    const compositor: CompositorInterface = CompositorFactory.create(
+      dto.compositor,
+    );
+    const scale: GenericalScale = ScaleFactory.create(
+      dto.scale || 'harmonicMajor',
+    );
     return compositor.getMusic(
-      generateMelodyDto.notesCount,
-      generateMelodyDto.tempo,
-      generateMelodyDto.scale,
-      generateMelodyDto.key
-        ? new NoteOne(generateMelodyDto.key.midi)
-        : undefined,
+      dto.notesCount,
+      dto.tempo,
+      scale,
+      dto.key ? new NoteOne(dto.key.midi) : undefined,
     );
   }
 }

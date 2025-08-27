@@ -39,7 +39,7 @@ import {
 } from './Scales';
 
 // Registre des gammes
-export const scalesRegistry: Record<string, ScaleConstructor> = {
+export const scalesRegistry = {
   pentatonic: PentatonicScale,
   majorPentatonic: MajorPentatonicScale,
   chromatic: ChromaticScale,

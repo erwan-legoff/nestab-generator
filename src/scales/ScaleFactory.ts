@@ -1,12 +1,12 @@
 import { scalesRegistry } from './ScaleRegistry';
 
 export class ScaleFactory {
-  static getScale(name: keyof typeof scalesRegistry) {
+  static create(name: keyof typeof scalesRegistry) {
     const ScaleClass = scalesRegistry[name];
     return new ScaleClass();
   }
 
-  static getAllScales(): Array<{
+  static getAll(): Array<{
     id: keyof typeof scalesRegistry;
     label: string;
   }> {
