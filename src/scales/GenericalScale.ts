@@ -1,19 +1,21 @@
 import NoteOne from 'src/notes/NoteOne';
 
+export interface ScaleConstructor {
+  new (): GenericalScale; // instanciable
+  readonly label: string; // doit avoir ce static
+}
 export class GenericalScale {
   protected intervals: Array<number>;
-  protected name: string;
   /**
    *
    * @param intervals the note differences with the root
    * @param name name of the scale
    */
-  constructor(intervals: Array<number>, name: string) {
+  constructor(intervals: Array<number>) {
     if (!intervals.includes(0)) intervals.push(0); // A scale should always have the root
     intervals = intervals.filter((interval) => interval <= 12); // A scale should have less than one octave
     intervals = intervals.sort((a, b) => a - b);
     this.intervals = intervals;
-    this.name = name;
   }
   /**
    ** It will give all notes of the current scale
