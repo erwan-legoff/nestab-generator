@@ -24,7 +24,10 @@ export class TabsService {
     return response;
   }
   previewFromMelody(generateTabDto: TabFromMelodyDto): GenerateTabResponseDto {
-    const track = convertToTrack(generateTabDto.playedNotes, 120);
+    const track = convertToTrack(
+      generateTabDto.playedNotes,
+      generateTabDto.beatPerMinute,
+    );
     const tab: TabGuitar = new TabGuitar(generateTabDto.tabName, track);
     const response: GenerateTabResponseDto = {
       fretBoard: tab.getFretBoard(),

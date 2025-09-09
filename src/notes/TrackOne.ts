@@ -7,6 +7,8 @@ export class TrackOne {
   playedNotes: PlayedNote[] = [];
   readonly beatLength: number = 1; // in seconds
   constructor(playedNotes: PlayedNote[], beatPerMinute: number = 120) {
+    // logging bpm
+    console.log(`Creating TrackOne with BPM: ${beatPerMinute}`);
     this.playedNotes = playedNotes;
     if (beatPerMinute <= 0)
       throw new Error('beatPerMinute must be greater than 0');
@@ -27,7 +29,6 @@ export class TrackOne {
       const time =
         timeSpent + playedNote.getTimeBeforeStart() * this.beatLength;
       const duration = playedNote.getDuration() * this.beatLength;
-
       track.addNote({
         midi,
         time,
