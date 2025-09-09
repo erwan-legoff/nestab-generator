@@ -14,9 +14,13 @@ export class MelodiesService {
     const compositor: CompositorInterface = CompositorFactory.create(
       dto.compositor,
     );
-    const scale: GenericalScale = ScaleFactory.create(
-      dto.scale || 'harmonicMajor',
-    );
+    let scale: GenericalScale | undefined;
+    try {
+      scale = ScaleFactory.create(dto.scale || 'harmonicMajor');
+    } catch (error) {
+      scale = ScaleFactory.create('harmonicMajor');
+      console.error(error);
+    }
     return compositor.getMusic(
       dto.notesCount,
       dto.tempo,
